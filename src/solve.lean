@@ -88,6 +88,8 @@ def reduce (e: Eqs): option EqsReduction :=
 
 def coeff_sum (e: Eq): ℕ := (e.as.map (int.nat_abs)).sum
 
+-- Simplify should decrease `t eqs`, so that `solve_eqs` terminates.
+-- This is used for the termination proof.
 def t (e: Eqs): /- dim -/ ℕ × /- min non-neg abs val -/ ℕ × /- coeff. abs sum in eq -/ ℕ :=
 	match find_min_non_zero_or_default e with
 	| none := (0, 0, 0)
@@ -143,8 +145,8 @@ def ex4 := Eqs.from [
 def cur_eqs := ex3
 meta def x := solve_eqs cur_eqs
 
--- This outputs a solution if one exists. However on the eval!
+-- This outputs a solution if one exists. Hover on the eval!
 #eval x
 
--- This verifies that x is a solution
+-- This computes if x is really a solution
 #eval x.map (λ s, cur_eqs.is_solution s)

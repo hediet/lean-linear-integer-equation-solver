@@ -91,7 +91,7 @@ begin
 end
 
 theorem fixpoint_of_simplify_terminates (eqs: Eqs) (r: EqsReduction)
-	(h1: simplify eqs = some r): (t r.eqs ≤ t eqs) :=
+	(h1: simplify eqs = some r): (t r.eqs < t eqs) :=
 begin
 	sorry,
 end
